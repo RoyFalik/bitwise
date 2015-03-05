@@ -13,7 +13,6 @@ $(document).ready(function() {
 		else{
 			var priority = dropdown.value;
 			var elementID = "draggable" + counter;
-			console.log(elementID);
 			// $('#submissioncontainer').empty();
 			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>" + txtinput + "</aside>");
 			$("<style type='text/css'> #"+elementID+"{\
@@ -21,14 +20,16 @@ $(document).ready(function() {
 			    left: 0;\
 			    top: 0;\
 			    width: 200px; \
+			    height: 40px;\
 			    background: rgba(255,255,255,0.66); \
 			    border: 2px solid rgba(0,0,0,0.5);\
 			    border-radius: 4px; padding: 8px;\
 			    z-index: 9999;\
 				} </style>").appendTo("head");
 			var dm = document.getElementById(elementID);
-			console.log(dm);
-			dm.addEventListener('dragstart', drag_start,false);  
+			dm.addEventListener('dragstart', drag_start,false); 
+			dm.addEventListener('dragover', drag_over_item,false); 
+			dm.addEventListener('drop',drop_over_item,false); 
 			textbox.value = "";
 			counter++;
 		}
