@@ -2,11 +2,12 @@ $(document).ready(function() {
 	var textbox = document.getElementById("textbox");
 	var dropdown = document.getElementById("dropdown");
 	var counter = 0;
+	var textinput;
 	var previous;
 
 	//creates a new div of a submitted number
 	$("#submitbutton").on("click", function submitNumber(event) {
-		var txtinput = textbox.value;
+		txtinput = textbox.value;
 		if (txtinput === "")
 		{
 			console.log("please enter a number");
@@ -41,9 +42,11 @@ $(document).ready(function() {
 	}).change(function convertRequest() {
 		if(previous != 'tc'){
 			//call base converstion
+			convert_bases(previous, textinput, this.value);
 		}
 		else{
 			//call twos complement
+			twos_complement(number, word);
 		}
 		console.log("converted to: " + this.value);
 	});
