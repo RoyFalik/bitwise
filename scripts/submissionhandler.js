@@ -2,6 +2,7 @@ $(document).ready(function() {
 	var textbox = document.getElementById("textbox");
 	var dropdown = document.getElementById("dropdown");
 	var counter = 0;
+	var previous;
 
 	//creates a new div of a submitted number
 	$("#submitbutton").on("click", function submitNumber(event) {
@@ -35,7 +36,15 @@ $(document).ready(function() {
 	});
 
 	//recognizes if value is changed
-	$("#dropdown").change(function convertRequest() {
+	$("#dropdown").on('focus', function(){
+		previous = this.value;
+	}).change(function convertRequest() {
+		if(previous != 'tc'){
+			//call base converstion
+		}
+		else{
+			//call twos complement
+		}
 		console.log("converted to: " + this.value);
 	});
 	
