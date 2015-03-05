@@ -35,9 +35,16 @@ $(document).ready(function() {
 		}
 	});
 
-	//recognizes if value is changed
+	//recognizes if representation type is changed
 	$("#dropdown").change(function convertRequest() {
 		console.log("converted to: " + this.value);
 	});
+
+	//recognizes if word size is changed
+	$("input:radio[name='wordsize']").change(function getWordsize(){
+      console.log($("input[name='wordsize']:checked").val());
+  	});
+
+	
 	
 });

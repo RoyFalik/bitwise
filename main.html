@@ -43,7 +43,7 @@
 
 <div class="container">
 	<p>Enter a number:</p>
-					<form action="#">
+					<form action="#" id="submissionform">
 						<input type="text" id="textbox"></input>
 						<select id="dropdown">
 							<option value="bin">Binary</option>
@@ -51,6 +51,8 @@
 							<option value="dec">Decimal</option>
 							<option value="tc">Two's Complement</option>
 						</select>
+							<input type="radio" name="wordsize" value="32bit" /> 32bit word </input>
+							<input type="radio" name="wordsize" value="64bit" /> 64bit word </input><br>
 						<button type="button" id="submitbutton">Submit</button>
 					</form>
 	<div id="submissioncontainer">
