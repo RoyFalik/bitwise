@@ -60,37 +60,27 @@ function mapping(x){
 }
 
 
-//get number in binary
-var number = "01111111";
-//get word size (32 or 64)
-var word = 8;
-var result = 0;
-//if most sig bit is 1, make it negative
-if(number.charAt(0) === '1')
-    result -= Math.pow(2, word-1);
-var i;
-//current power offset
-var curr_pow = word-2;
-//starting with second character in string, loop through
-//and if curr char is a 1, add to result
-for(i = 1; i < word; i++){
-    if(number.charAt(i) === "1"){
-        //add 2^curr_pow to result
-        result += Math.pow(2, curr_pow);
+function twos_complement(number, word){
+    //get number in binary
+    //var number = "01111111";
+    //get word size (32 or 64)
+    //var word = 8;
+    var result = 0;
+    //if most sig bit is 1, make it negative
+    if(number.charAt(0) === '1')
+        result -= Math.pow(2, word-1);
+    var i;
+    //current power offset
+    var curr_pow = word-2;
+    //starting with second character in string, loop through
+    //and if curr char is a 1, add to result
+    for(i = 1; i < word; i++){
+        if(number.charAt(i) === "1"){
+            //add 2^curr_pow to result
+            result += Math.pow(2, curr_pow);
+        }
+        //decrement current power
+        curr_pow--;
     }
-    //decrement current power
-    curr_pow--;
+    console.log(result);
 }
-
-console.log(result);
-
-
-
-/* 0101 = 5
-1010 = 10
-
-2s comp:
-0101 = 5
-1010 = -6
-
-*/
