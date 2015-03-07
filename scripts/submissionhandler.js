@@ -2,8 +2,9 @@ $(document).ready(function() {
 	var textbox = document.getElementById("textbox");
 	var dropdown = document.getElementById("dropdown");
 	var counter = 0;
-	var textinput;
+	var txtinput;
 	var previous;
+	var result;
 
 	//creates a new div of a submitted number
 	$("#submitbutton").on("click", function submitNumber(event) {
@@ -37,19 +38,21 @@ $(document).ready(function() {
 		}
 	});
 
-
-	//recognizes if value is changed
 	$("#dropdown").on('focus', function(){
+		//get input base
 		previous = this.value;
+		txtinput = textbox.value;
+		//when base is changed, get output base
 	}).change(function convertRequest() {
+		//if original base was not two's complement, convert to new base
 		if(previous != 'tc'){
-			//call base converstion
-			convert_bases(previous, textinput, this.value);
+			result = convert_bases(previous, txtinput, this.value);
 		}
+		//if two's complement, interpret as two's complement
 		else{
-			//call twos complement
-			twos_complement(number, word);
+			result = twos_complement(number, word);
 		}
+		textbox.value = result;
 		console.log("converted to: " + this.value);
 	});
 
@@ -57,7 +60,4 @@ $(document).ready(function() {
 	$("input:radio[name='wordsize']").change(function getWordsize(){
       console.log($("input[name='wordsize']:checked").val());
   	});
-
-	
-	
 });
