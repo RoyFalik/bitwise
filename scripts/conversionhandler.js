@@ -32,10 +32,19 @@ function get_base(base){
     }
 }
 
-function twos_complement(number, word){
+
+//edit so any base can be input
+function twos_complement(original_base, number, word){
     var result = 0;
+    //get original base
+    var original_base_int = get_base(original_base);
+    //parse number with original base
+    var num = parseInt(number, original_base);
+    //toString with new base (2)
+    var num_as_bin = num.toString(2);
+
     //if most sig bit is 1, make it negative
-    if(number.charAt(0) === '1')
+    if(num_as_bin.charAt(0) === '1')
         result -= Math.pow(2, word - 1);
     var i;
     //current power offset
@@ -43,7 +52,7 @@ function twos_complement(number, word){
     //starting with second character in string, loop through
     //and if curr char is a 1, add to result
     for(i = 1; i < word; i++){
-        if(number.charAt(i) === "1"){
+        if(num_as_bin.charAt(i) === "1"){
             //add 2^curr_pow to result
             result += Math.pow(2, curr_pow);
         }

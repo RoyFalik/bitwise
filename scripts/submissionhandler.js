@@ -62,7 +62,7 @@ $(document).ready(function() {
 				alert("Please choose a word size");
 
 			//interpret
-			result = twos_complement(txtinput, word_size);
+			result = twos_complement(previous, txtinput, word_size);
 		}
 		textbox.value = result;
 		console.log("converted to: " + this.value);
