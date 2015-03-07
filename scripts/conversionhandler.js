@@ -33,10 +33,6 @@ function get_base(base){
 }
 
 function twos_complement(number, word){
-    //get number in binary
-    //var number = "01111111";
-    //get word size (32 or 64)
-    //var word = 8;
     var result = 0;
     //if most sig bit is 1, make it negative
     if(number.charAt(0) === '1')
