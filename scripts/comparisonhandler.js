@@ -1,12 +1,9 @@
 function comparison(elem1, elem2){
 	$('#submissioncontainer').append("<aside id='menu'></aside>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>~</button><br>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>!</button><br>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>Shift left <<1</button><br>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>Shift right >>1</button><br>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>Convert to: Dec</button><br>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>Convert to: Hex</button><br>");
-	$("#menu").append("<button onclick='test("+elem1.id+ "," + elem2.id+")' class='btn'>Convert to: TC</button><br>");
+	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>XOR</button><br>");
+	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>AND</button><br>");
+	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>OR</button><br>");
+	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>Add</button><br>");
 	$("<style type='text/css'> #"+ menu +"{\
 			    position:  absolute;\
 			    left: 0;\
@@ -17,9 +14,10 @@ function comparison(elem1, elem2){
 			    z-index: 9999;\
 				} </style>").appendTo("head");
 	var menuElem = document.getElementById("menu");
-	var style = window.getComputedStyle(elem2, null);
-	menuElem.style.left = (parseInt(style.getPropertyValue("left"),10))+ 200 + 'px';
-	menuElem.style.top = (parseInt(style.getPropertyValue("top"),10)) +40+ 'px';
+	var menuleft = ((parseInt($('#' + elem1.id).css('left'))) + (parseInt($('#' + elem2.id).css('left'))))/2;
+	var menutop = parseInt($('#' + elem1.id).css('height')) + parseInt($('#' + elem1.id).css('top'));
+	menuElem.style.left = menuleft + 'px';
+	menuElem.style.top = menutop+ 'px';
 
 	console.log(elem1.id);
 	console.log(elem2.id);
@@ -28,7 +26,14 @@ function comparison(elem1, elem2){
 	//each button maps to different functions
 }
 
-function test(elem1, elem2){
-	console.log(elem1.id);
-	console.log(elem2.id);
+function test(elem1){
+	console.log(elem1);
+}
+
+function test2(elem1, elem2){
+	console.log(elem1);
+	console.log(elem2);
+	$("#menu").remove();
+	//create a new element that is the result of the operation selected -- located in submissionhandler
+	resultElement(elem1, elem2);
 }
