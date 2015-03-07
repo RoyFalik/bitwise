@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var txtinput;
 	var previous;
 	var result;
+	var word_size;
 
 	//creates a new div of a submitted number
 	$("#submitbutton").on("click", function submitNumber(event) {
@@ -38,19 +39,30 @@ $(document).ready(function() {
 		}
 	});
 
+	//when dropdown selected
 	$("#dropdown").on('focus', function(){
 		//get input base
 		previous = this.value;
 		txtinput = textbox.value;
-		//when base is changed, get output base
+
+		//when dropdown value (base) is changed, get output base
 	}).change(function convertRequest() {
 		//if original base was not two's complement, convert to new base
-		if(previous != 'tc'){
+		if(previous != 'tc' && this.value != 'tc'){
 			result = convert_bases(previous, txtinput, this.value);
 		}
 		//if two's complement, interpret as two's complement
 		else{
-			result = twos_complement(number, word);
+			//determine word size
+			if(document.getElementById("thirty_two_bit").checked)
+				word_size = 32;
+			else if(document.getElementById("sixty_four_bit").checked)
+				word_size = 64;
+			else
+				alert("Please choose a word size");
+
+			//interpret
+			result = twos_complement(txtinput, word_size);
 		}
 		textbox.value = result;
 		console.log("converted to: " + this.value);

@@ -40,10 +40,10 @@ function twos_complement(number, word){
     var result = 0;
     //if most sig bit is 1, make it negative
     if(number.charAt(0) === '1')
-        result -= Math.pow(2, word-1);
+        result -= Math.pow(2, word - 1);
     var i;
     //current power offset
-    var curr_pow = word-2;
+    var curr_pow = word - 2;
     //starting with second character in string, loop through
     //and if curr char is a 1, add to result
     for(i = 1; i < word; i++){
@@ -55,4 +55,5 @@ function twos_complement(number, word){
         curr_pow--;
     }
     console.log(result);
+    return result;
 }
