@@ -1,3 +1,9 @@
+var counter = 0;
+var txtinput;
+var previous;
+var result;
+var word_size;
+
 function resultElement(elem1, elem2){
 	var elementID = "draggable" + counter;
 			// $('#submissioncontainer').empty();
@@ -84,11 +90,6 @@ function newElement(txtinput){
 $(document).ready(function() {
 	var textbox = document.getElementById("textbox");
 	var dropdown = document.getElementById("dropdown");
-	var counter = 0;
-	var txtinput;
-	var previous;
-	var result;
-	var word_size;
 
 	//creates a new div of a submitted number
 	$("#submitbutton").on("click", function submitNumber(event) {
