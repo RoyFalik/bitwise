@@ -23,8 +23,14 @@
 		    var packet = event.dataTransfer.getData("text/plain").split(',');
 		    var elem = document.getElementById(packet[2]);
 	   		var over = event.target;
+	   		//if dropped over a button, then get the parent element of the button
+	   		if (event.target.id.indexOf("button") != -1){
+	   			var parentElement = "draggable" + event.target.id.substr(event.target.id.indexOf("draggable"));
+	   			console.log(parentElement);
+	   			over = document.getElementById(parentElement);
+	   		}
 		    //if dropped onto a different element, stagger them side by side and call comparison
-		    if (elem.id != event.target.id){
+		    if (elem.id != over.id){
 		    	//left is left of first element + its width
 		   		var style = window.getComputedStyle(over, null);
 		    	//top is same as top of first element 

@@ -10,7 +10,7 @@ function resultElement(elem1, elem2){
 			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>Result of: " + elem1.id + " and " + elem2.id + "</aside>");
 			$("#"+elementID).append("\
 				<div class='btn-group'>\
-  					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;'>\
+  					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;' id='button" + counter +"'>\
     					Action <span class='caret'></span>\
   					</button>\
   					<ul class='dropdown-menu' role='menu'>\
@@ -53,7 +53,7 @@ function newElement(txtinput){
 			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>"+txtinput+"</aside>");
 			$("#"+elementID).append("\
 				<div class='btn-group'>\
-  					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;'>\
+  					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;' id='button" + counter +"'>\
     					Action <span class='caret'></span>\
   					</button>\
   					<ul class='dropdown-menu' role='menu'>\
