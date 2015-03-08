@@ -1,5 +1,3 @@
-var counter = 0;
-
 function resultElement(elem1, elem2){
 	var elementID = "draggable" + counter;
 			// $('#submissioncontainer').empty();
@@ -86,6 +84,11 @@ function newElement(txtinput){
 $(document).ready(function() {
 	var textbox = document.getElementById("textbox");
 	var dropdown = document.getElementById("dropdown");
+	var counter = 0;
+	var txtinput;
+	var previous;
+	var result;
+	var word_size;
 
 	//creates a new div of a submitted number
 	$("#submitbutton").on("click", function submitNumber(event) {
@@ -99,16 +102,34 @@ $(document).ready(function() {
 		}
 	});
 
-	//recognizes if representation type is changed
-	$("#dropdown").change(function convertRequest() {
+		//when dropdown selected
+	$("#dropdown").on('focus', function(){
+		//get input base
+		previous = this.value;
+		txtinput = textbox.value;
+
+		//when dropdown value (base) is changed, get output base
+	}).change(function convertRequest() {
+		//if original base was not two's complement, convert to new base
+		if(previous != 'tc' && this.value != 'tc'){
+			result = convert_bases(previous, txtinput, this.value);
+		}
+		//if two's complement, interpret as two's complement
+		else{
+			//determine word size
+			if(document.getElementById("thirty_two_bit").checked)
+				word_size = 32;
+			else if(document.getElementById("sixty_four_bit").checked)
+				word_size = 64;
+			else
+				alert("Please choose a word size");
+
+			//interpret
+			result = twos_complement(previous, txtinput, word_size);
+		}
+		textbox.value = result;
 		console.log("converted to: " + this.value);
 	});
 
-	//recognizes if word size is changed
-	$("input:radio[name='wordsize']").change(function getWordsize(){
-      console.log($("input[name='wordsize']:checked").val());
-  	});
-
-	
-	
 });
+	

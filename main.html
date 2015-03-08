@@ -1,6 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+
 	<style>
 	.box {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
 	.col-sm-12 {height:1000px;border:1px solid #aaaaaa;}
@@ -32,7 +36,8 @@
 
 	<script src="./scripts/draggable.js" type="text/javascript"></script>
 	<script src="./scripts/submissionhandler.js" type="text/javascript"></script>
-	<script src="./scripts/comparisonhandler.js" type="text/javascript"></script>
+	<script src="./scripts/conversionhandler.js" type="text/javascript"></script>
+	<script src="./scripts/bitopshandler.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -51,8 +56,8 @@
 							<option value="dec">Decimal</option>
 							<option value="tc">Two's Complement</option>
 						</select>
-							<input type="radio" name="wordsize" value="32bit" /> 32bit word </input>
-							<input type="radio" name="wordsize" value="64bit" /> 64bit word </input><br>
+							<input type="radio" name="wordsize" value="32bit" id="thirty_two_bit"/> 32bit word </input>
+							<input type="radio" name="wordsize" value="64bit" id="sixty_four_bit"/> 64bit word </input><br>
 						<button type="button" id="submitbutton">Submit</button>
 					</form>
 	<div id="submissioncontainer">
@@ -63,9 +68,5 @@
 		</div>
 	</div>	
 </div>
-
-
-
-
 </body>
 </html>
