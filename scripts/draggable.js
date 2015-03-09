@@ -36,6 +36,7 @@
 		    	//top is same as top of first element 
 			    elem.style.left = (parseInt(style.getPropertyValue("left"),10))+ (parseInt(style.getPropertyValue("width"),10)) + 'px';
 			    elem.style.top = (parseInt(style.getPropertyValue("top"),10)) + 'px';
+			    $("#menu").remove();
 			    comparison(elem, over);
 			    return false;
 			}

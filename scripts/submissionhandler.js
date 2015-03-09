@@ -4,16 +4,16 @@ var previous;
 var result;
 var word_size;
 
-function resultElement(elem1, elem2){
+function resultElement(elem1, elem2, txtinput, base){
 	var elementID = "draggable" + counter;
 			// $('#submissioncontainer').empty();
-			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>Result of: " + elem1.id + " and " + elem2.id + "</aside>");
+			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>Result of: " + txtinput + "</aside>");
 			$("#"+elementID).append("\
 				<div class='btn-group'>\
   					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;' id='button" + counter +"'>\
     					Action <span class='caret'></span>\
   					</button>\
-  					<ul class='dropdown-menu' role='menu'>\
+  					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
 					    <li onclick='test(" +  elementID + ")'><a>~</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>!</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>Shift left <<1</a></li>\
@@ -24,6 +24,8 @@ function resultElement(elem1, elem2){
 					    <li onclick='test(" +  elementID + ")'><a>Convert to binary</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
+				</div>\
+				<div id='base" + counter +"' style='display:none;'>\
 				</div>\
 			");
 			var elemleft = ((parseInt($('#' + elem1.id).css('left'))) + (parseInt($('#' + elem2.id).css('left'))))/2;
@@ -47,7 +49,7 @@ function resultElement(elem1, elem2){
 			counter++;
 }
 
-function newElement(txtinput){
+function newElement(txtinput, base){
 	var elementID = "draggable" + counter;
 			// $('#submissioncontainer').empty();
 			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>"+txtinput+"</aside>");
@@ -56,7 +58,7 @@ function newElement(txtinput){
   					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;' id='button" + counter +"'>\
     					Action <span class='caret'></span>\
   					</button>\
-  					<ul class='dropdown-menu' role='menu'>\
+  					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
 					    <li onclick='test(" +  elementID + ")'><a>~</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>!</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>Shift left <<1</a></li>\
@@ -68,6 +70,8 @@ function newElement(txtinput){
 					    <li onclick='test(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
+				<div id='base" + counter +"' style='display:none;'>\
+				</div>\
 			");
 			$("<style type='text/css'> #"+elementID+"{\
 			    position:  absolute;\
@@ -76,7 +80,7 @@ function newElement(txtinput){
 			    background: rgba(255,255,255,0.66); \
 			    border: 2px solid rgba(0,0,0,0.5);\
 			    border-radius: 4px; padding: 8px;\
-			    z-index: 9999;\
+			    z-index: 9998;\
 				} </style>").appendTo("head");
 			var dm = document.getElementById(elementID);
 			dm.addEventListener('dragstart', drag_start,false); 
@@ -99,7 +103,8 @@ $(document).ready(function() {
 			console.log("please enter a number");
 		}
 		else{
-			newElement(txtinput);
+			var base = $("#dropdown").value;
+			newElement(txtinput, base);
 		}
 	});
 

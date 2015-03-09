@@ -1,9 +1,10 @@
 function comparison(elem1, elem2){
+	//pop up a little menu
 	$('#submissioncontainer').append("<aside id='menu'></aside>");
-	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>XOR</button><br>");
-	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>AND</button><br>");
-	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>OR</button><br>");
-	$("#menu").append("<button onclick='test2("+elem1.id+ "," + elem2.id+")' class='btn'>Add</button><br>");
+	$("#menu").append("<button onclick='xor("+elem1.id+ "," + elem2.id+")' class='btn'>XOR</button><br>");
+	$("#menu").append("<button onclick='and("+elem1.id+ "," + elem2.id+")' class='btn'>AND</button><br>");
+	$("#menu").append("<button onclick='or("+elem1.id+ "," + elem2.id+")' class='btn'>OR</button><br>");
+	$("#menu").append("<button onclick='add("+elem1.id+ "," + elem2.id+")' class='btn'>Add</button><br>");
 	$("<style type='text/css'> #"+ menu +"{\
 			    position:  absolute;\
 			    left: 0;\
@@ -26,14 +27,30 @@ function comparison(elem1, elem2){
 	//each button maps to different functions
 }
 
-function test(elem1){
-	console.log(elem1);
+function xor(elem1, elem2){
+
 }
+
+function and(elem1, elem2){
+
+}
+function or(elem1, elem2){
+
+}
+function add(elem1, elem2){
+	console.log(elem1);
+	console.log(elem2);
+	$("#menu").remove();
+	var txtinput = 
+	//create a new element that is the result of the operation selected -- located in submissionhandler
+	// resultElement(elem1, elem2, );
+}
+
 
 function test2(elem1, elem2){
 	console.log(elem1);
 	console.log(elem2);
 	$("#menu").remove();
 	//create a new element that is the result of the operation selected -- located in submissionhandler
-	resultElement(elem1, elem2);
+	// resultElement(elem1, elem2);
 }
