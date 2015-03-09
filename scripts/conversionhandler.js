@@ -6,6 +6,7 @@ function convert_bases(original_base, input_num, new_base){
     var original_base_int = get_base(original_base);
     var convert_num = parseInt(input_num, original_base_int);
     var new_base_int = get_base(new_base);
+    console.log("new base int: " + new_base_int);
     converted_num = prefix(new_base_int) + convert_num.toString(new_base_int);
     return converted_num;
 }
@@ -20,16 +21,25 @@ function prefix(base){
 }
 
 function get_base(base){
-    switch(base){
-        case "bin":
-            return 2;
-        case "hex":
-            return 16;
-        case "dec":
-            return 10;
-        default:
-            return 0;
-    }
+    console.log("get_base parameter: " + base);
+    if (base == "dec")
+        return 10;
+    else if (base == "bin")
+        return 2;
+    else if (base == "hex")
+        return 16;
+    else
+        return 0;
+    // switch(base){
+    //     case 'bin':
+    //         return 2;break;
+    //     case 'hex':
+    //         return 16;break;
+    //     case 'dec':
+    //         return 10;break;
+    //     default:
+    //         return 0;
+    // }
 }
 
 

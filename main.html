@@ -48,19 +48,19 @@
 	</aside> -->
 
 <div class="container">
-	<p>Enter a number:</p>
+	<h2>Enter a number:</h2>
 					<form action="#" id="submissionform">
-						<input type="text" id="textbox"></input>
+						<input type="text" id="textbox" style="text-align:right;" size="50"></input>
 						<select id="dropdown">
-							<option value="bin">Binary</option>
-							<option value="hex">Hexadecimal</option>
-							<option value="dec">Decimal</option>
-							<option value="tc">Two's Complement</option>
+							<option value="bin" style="background-color:green;color:white;">Binary</option>
+							<option value="hex" style="background-color:red;color:white;">Hexadecimal</option>
+							<option value="dec" style="background-color:blue;color:white;">Decimal</option>
+							<option value="tc" style="background-color:yellow;color:black;">Two's Complement</option>
 						</select>
 							<input type="radio" name="wordsize" value="32bit" id="thirty_two_bit"/> 32bit word </input>
-							<input type="radio" name="wordsize" value="64bit" id="sixty_four_bit"/> 64bit word </input><br>
-						<button type="button" id="submitbutton">Submit</button>
-					</form>
+							<input type="radio" name="wordsize" value="64bit" id="sixty_four_bit"/> 64bit word </input><br><br>
+						<button type="button" id="submitbutton" class="btn-lg">Submit</button>
+					</form><br>
 	<div id="submissioncontainer">
 	</div>
 

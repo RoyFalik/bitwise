@@ -38,16 +38,24 @@ function or(elem1, elem2){
 
 }
 function add(elem1, elem2){
-	console.log(elem1);
-	console.log(elem2);
+	var dec1;
+	var txtinput;
 	$("#menu").remove();
-	var base1 = $("#base" + parseInt(elem1)).value;
-	var base2 = $("#base" + parseInt(elem2)).value;
-	console.log(base1);
-	console.log(base2);
-	// var txtinput = 
+	var base1 = document.getElementById("base"+elem1.id.substr(elem1.id.indexOf("draggable")+9)).innerHTML;
+	var value1 = document.getElementById("value"+elem1.id.substr(elem1.id.indexOf("draggable")+9)).innerHTML;
+	dec1 = convert_bases(base1, value1, "dec");
+
+	var base2 = document.getElementById("base"+elem2.id.substr(elem2.id.indexOf("draggable")+9)).innerHTML;
+	var value2 = document.getElementById("value"+elem2.id.substr(elem2.id.indexOf("draggable")+9)).innerHTML;
+	dec2 = convert_bases(base2, value2, "dec");
+	
+	console.log(dec1);
+	console.log(dec2);
+	var result = parseInt(dec1, 10) + parseInt(dec2, 10);
+	console.log("result: "+ result);
+	txtinput = convert_bases("dec", ""+result, ""+base2);
 	//create a new element that is the result of the operation selected -- located in submissionhandler
-	// resultElement(elem1, elem2, );
+	resultElement(elem1, elem2, txtinput, base2);
 }
 
 

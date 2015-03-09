@@ -7,7 +7,7 @@ var word_size;
 function resultElement(elem1, elem2, txtinput, base){
 	var elementID = "draggable" + counter;
 			// $('#submissioncontainer').empty();
-			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>Result of: " + txtinput + "</aside>");
+			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>" + txtinput + "</aside>");
 			$("#"+elementID).append("\
 				<div class='btn-group'>\
   					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;' id='button" + counter +"'>\
@@ -27,15 +27,31 @@ function resultElement(elem1, elem2, txtinput, base){
 				</div>\
 				<div id='base" + counter +"' style='display:none;'>"+base+"\
 				</div>\
+				<div id='value" + counter +"' style='display:none;'>"+txtinput+"\
+				</div>\
 			");
 			var elemleft = ((parseInt($('#' + elem1.id).css('left'))) + (parseInt($('#' + elem2.id).css('left'))))/2;
 			var elemtop = parseInt($('#' + elem1.id).css('height')) + parseInt($('#' + elem1.id).css('top'));
+			var color;
+				switch(base){
+        			case "hex":
+            			color = "red";break;
+        			case "dec":
+            			color = "blue";break;
+            		case "bin":
+            			color = "green";break;
+            		case "tc":
+            			color = "yellow";break;
+        			default:
+            			color = "black";break;
+    			}
 			$("<style type='text/css'> #"+elementID+"{\
 			    position:  absolute;\
 			    left: 0;\
 			    top: 0;\
 			    background: rgba(255,255,255,0.66); \
-			    border: 2px solid rgba(0,0,0,0.5);\
+			    border: 2px solid;\
+			    border-color: "+color+";\
 			    border-radius: 4px; padding: 8px;\
 			    z-index: 9999;\
 				} </style>").appendTo("head");
@@ -52,7 +68,7 @@ function resultElement(elem1, elem2, txtinput, base){
 function newElement(txtinput, base){
 	var elementID = "draggable" + counter;
 			// $('#submissioncontainer').empty();
-			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>"+txtinput+"</aside>");
+			$('#submissioncontainer').append("<aside id='"+elementID+"' draggable='true'>" + txtinput + "</aside>");
 			$("#"+elementID).append("\
 				<div class='btn-group'>\
   					<button type='button' class='btn btn-sm dropdown-toggle' data-toggle='dropdown' aria-expanded='false' style='float:right;' id='button" + counter +"'>\
@@ -72,13 +88,29 @@ function newElement(txtinput, base){
 				</div>\
 				<div id='base" + counter +"' style='display:none;'>"+base+"\
 				</div>\
+				<div id='value" + counter +"' style='display:none;'>"+txtinput+"\
+				</div>\
 			");
+			var color;
+				switch(base){
+        			case "hex":
+            			color = "red";break;
+        			case "dec":
+            			color = "blue";break;
+            		case "bin":
+            			color = "green";break;
+            		case "tc":
+            			color = "yellow";break;
+        			default:
+            			color = "black";break;
+    			}
 			$("<style type='text/css'> #"+elementID+"{\
 			    position:  absolute;\
 			    left: 0;\
 			    top: 0;\
 			    background: rgba(255,255,255,0.66); \
-			    border: 2px solid rgba(0,0,0,0.5);\
+			    border: 2px solid;\
+			    border-color: "+color+";\
 			    border-radius: 4px; padding: 8px;\
 			    z-index: 9998;\
 				} </style>").appendTo("head");
@@ -103,7 +135,7 @@ $(document).ready(function() {
 			console.log("please enter a number");
 		}
 		else{
-			var base = $("#dropdown").value;
+			var base = dropdown.value;
 			newElement(txtinput, base);
 		}
 	});
