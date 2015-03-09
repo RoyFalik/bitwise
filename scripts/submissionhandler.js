@@ -25,7 +25,7 @@ function resultElement(elem1, elem2, txtinput, base){
 					    <li onclick='test(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
-				<div id='base" + counter +"' style='display:none;'>\
+				<div id='base" + counter +"' style='display:none;'>"+base+"\
 				</div>\
 			");
 			var elemleft = ((parseInt($('#' + elem1.id).css('left'))) + (parseInt($('#' + elem2.id).css('left'))))/2;
@@ -70,7 +70,7 @@ function newElement(txtinput, base){
 					    <li onclick='test(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
-				<div id='base" + counter +"' style='display:none;'>\
+				<div id='base" + counter +"' style='display:none;'>"+base+"\
 				</div>\
 			");
 			$("<style type='text/css'> #"+elementID+"{\

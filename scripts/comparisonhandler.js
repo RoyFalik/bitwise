@@ -41,7 +41,11 @@ function add(elem1, elem2){
 	console.log(elem1);
 	console.log(elem2);
 	$("#menu").remove();
-	var txtinput = 
+	var base1 = $("#base" + parseInt(elem1)).value;
+	var base2 = $("#base" + parseInt(elem2)).value;
+	console.log(base1);
+	console.log(base2);
+	// var txtinput = 
 	//create a new element that is the result of the operation selected -- located in submissionhandler
 	// resultElement(elem1, elem2, );
 }
