@@ -39,6 +39,7 @@
 	<script src="./scripts/conversionhandler.js" type="text/javascript"></script>
 	<script src="./scripts/comparisonhandler.js" type="text/javascript"></script>
 	<script src="./scripts/bitopshandler.js" type="text/javascript"></script>
+	<script src="./scripts/bitopsmenuhandler.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -50,14 +51,14 @@
 <div class="container">
 	<h2>Enter a number:</h2>
 					<form action="#" id="submissionform">
-						<input type="text" id="textbox" style="text-align:right;" size="50"></input>
+						<input type="text" id="textbox" style="text-align:right;" size="50" autofocus></input>
 						<select id="dropdown">
-							<option value="bin" style="background-color:green;color:white;">Binary</option>
+							<option value="bin" style="background-color:green;color:white;">Binary(unsigned)</option>
+							<option value="tc" style="background-color:yellow;color:black;">Binary(signed)</option>
 							<option value="hex" style="background-color:red;color:white;">Hexadecimal</option>
 							<option value="dec" style="background-color:blue;color:white;">Decimal</option>
-							<option value="tc" style="background-color:yellow;color:black;">Two's Complement</option>
 						</select>
-							<input type="radio" name="wordsize" value="32bit" id="thirty_two_bit"/> 32bit word </input>
+							<input type="radio" name="wordsize" value="32bit" id="thirty_two_bit" checked="checked"/> 32bit word </input>
 							<input type="radio" name="wordsize" value="64bit" id="sixty_four_bit"/> 64bit word </input><br><br>
 						<button type="button" id="submitbutton" class="btn-lg">Submit</button>
 					</form><br>

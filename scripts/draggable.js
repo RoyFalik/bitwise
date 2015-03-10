@@ -26,7 +26,6 @@
 	   		//if dropped over a button, then get the parent element of the button
 	   		if (event.target.id.indexOf("button") != -1){
 	   			var parentElement = "draggable" + event.target.id.substr(event.target.id.indexOf("draggable"));
-	   			console.log(parentElement);
 	   			over = document.getElementById(parentElement);
 	   		}
 		    //if dropped onto a different element, stagger them side by side and call comparison

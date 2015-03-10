@@ -15,7 +15,7 @@ function resultElement(elem1, elem2, txtinput, base){
   					</button>\
   					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
 					    <li onclick='test(" +  elementID + ")'><a>~</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>!</a></li>\
+					    <li onclick='not(" +  elementID + ")'><a>!</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>Shift left <<1</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>Shift right >>1</a></li>\
 					    <li onclick='test(" +  elementID + ")'><a>Convert to dec</a></li>\
@@ -75,15 +75,15 @@ function newElement(txtinput, base){
     					Action <span class='caret'></span>\
   					</button>\
   					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
-					    <li onclick='test(" +  elementID + ")'><a>~</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>!</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Shift left <<1</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Shift right >>1</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to dec</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to hex</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to two's complement</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to binary</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Delete</a></li>\
+					    <li onclick='negate(" +  elementID + ")'><a>~</a></li>\
+					    <li onclick='not(" +  elementID + ")'><a>!</a></li>\
+					    <li onclick='shift_left(" +  elementID + ")'><a>Shift left <<1</a></li>\
+					    <li onclick='shift_right(" +  elementID + ")'><a>Shift right >>1</a></li>\
+					    <li onclick='convertDec(" +  elementID + ")'><a>Convert to dec</a></li>\
+					    <li onclick='convertHex(" +  elementID + ")'><a>Convert to hex</a></li>\
+					    <li onclick='convertTC(" +  elementID + ")'><a>Convert to two's complement</a></li>\
+					    <li onclick='convertBin(" +  elementID + ")'><a>Convert to binary</a></li>\
+					    <li onclick='deleteElement(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
 				<div id='base" + counter +"' style='display:none;'>"+base+"\
@@ -106,8 +106,8 @@ function newElement(txtinput, base){
     			}
 			$("<style type='text/css'> #"+elementID+"{\
 			    position:  absolute;\
-			    left: 0;\
-			    top: 0;\
+			    left: 230px;\
+			    top: 110px;\
 			    background: rgba(255,255,255,0.66); \
 			    border: 2px solid;\
 			    border-color: "+color+";\
@@ -149,12 +149,14 @@ $(document).ready(function() {
 		//when dropdown value (base) is changed, get output base
 	}).change(function convertRequest() {
 		//if original base was not two's complement, convert to new base
-		if(previous != 'tc' && this.value != 'tc'){
+		if(this.value != 'tc'){
 			result = convert_bases(previous, txtinput, this.value);
 		}
 		//if two's complement, interpret as two's complement
 		else{
-			//determine word size
+			//interpret
+			var word_size;
+			//determine if and which word size is chosen
 			if(document.getElementById("thirty_two_bit").checked)
 				word_size = 32;
 			else if(document.getElementById("sixty_four_bit").checked)
@@ -162,8 +164,7 @@ $(document).ready(function() {
 			else
 				alert("Please choose a word size");
 
-			//interpret
-			result = twos_complement(previous, txtinput, word_size);
+			result = twos_complement(txtinput, word_size);
 		}
 		textbox.value = result;
 		console.log("converted to: " + this.value);

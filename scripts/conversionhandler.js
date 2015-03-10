@@ -6,7 +6,6 @@ function convert_bases(original_base, input_num, new_base){
     var original_base_int = get_base(original_base);
     var convert_num = parseInt(input_num, original_base_int);
     var new_base_int = get_base(new_base);
-    console.log("new base int: " + new_base_int);
     converted_num = prefix(new_base_int) + convert_num.toString(new_base_int);
     return converted_num;
 }
@@ -21,54 +20,38 @@ function prefix(base){
 }
 
 function get_base(base){
-    console.log("get_base parameter: " + base);
-    if (base == "dec")
+    if (base.valueOf() == "dec")
         return 10;
-    else if (base == "bin")
+    else if (base.valueOf() == "bin")
         return 2;
-    else if (base == "hex")
+    else if (base.valueOf() == "hex")
         return 16;
     else
-        return 0;
-    // switch(base){
-    //     case 'bin':
-    //         return 2;break;
-    //     case 'hex':
-    //         return 16;break;
-    //     case 'dec':
-    //         return 10;break;
-    //     default:
-    //         return 0;
-    // }
+        return 2;
 }
 
 
 //edit so any base can be input
-function twos_complement(original_base, number, word){
-    var result = 0;
-    //get original base
-    var original_base_int = get_base(original_base);
-    //parse number with original base
-    var num = parseInt(number, original_base);
-    //toString with new base (2)
-    var num_as_bin = num.toString(2);
+function twos_complement(number, word){
+    //max pos for word size k = 2^(k-1)-1
+    //neg lim = -1*2^k
+    var MAX = Math.pow(2, word-1) -1;
+    var MIN = (-1) * Math.pow(2, word);
+    var result = "";
+    var num = parseInt(number, 10);
+    console.log(num);
 
-    //if most sig bit is 1, make it negative
-    if(num_as_bin.charAt(0) === '1')
-        result -= Math.pow(2, word - 1);
-    var i;
-    //current power offset
-    var curr_pow = word - 2;
-    //starting with second character in string, loop through
-    //and if curr char is a 1, add to result
-    for(i = 1; i < word; i++){
-        if(num_as_bin.charAt(i) === "1"){
-            //add 2^curr_pow to result
-            result += Math.pow(2, curr_pow);
+    if(num <= MAX && num >= MIN){
+        //var abs_num = Math.abs(num);
+        var i;
+        for(i = 0; i < word; i++){
+            result = (num&1) + result;
+            num >>= 1;
         }
-        //decrement current power
-        curr_pow--;
     }
-    console.log(result);
+    else{
+        alert("Please enter a " + word + "-sized number");
+        return;
+    }
     return result;
 }
