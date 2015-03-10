@@ -14,15 +14,15 @@ function resultElement(elem1, elem2, txtinput, base){
     					Action <span class='caret'></span>\
   					</button>\
   					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
-					    <li onclick='test(" +  elementID + ")'><a>~</a></li>\
+					    <li onclick='negate(" +  elementID + ")'><a>~</a></li>\
 					    <li onclick='not(" +  elementID + ")'><a>!</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Shift left <<1</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Shift right >>1</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to dec</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to hex</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to two's complement</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Convert to binary</a></li>\
-					    <li onclick='test(" +  elementID + ")'><a>Delete</a></li>\
+					    <li onclick='shift_left(" +  elementID + ")'><a>Shift left <<1</a></li>\
+					    <li onclick='shift_right(" +  elementID + ")'><a>Shift right >>1</a></li>\
+					    <li onclick='convertDec(" +  elementID + ")'><a>Convert to dec</a></li>\
+					    <li onclick='convertHex(" +  elementID + ")'><a>Convert to hex</a></li>\
+					    <li onclick='convertTC(" +  elementID + ")'><a>Convert to two's complement</a></li>\
+					    <li onclick='convertBin(" +  elementID + ")'><a>Convert to binary</a></li>\
+					    <li onclick='deleteElement(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
 				<div id='base" + counter +"' style='display:none;'>"+base+"\
@@ -120,7 +120,7 @@ function newElement(txtinput, base){
 			dm.addEventListener('drop',drop_over_item,false); 
 			textbox.value = "";
 			counter++;
-			console.log(elementID);
+
 }
 
 $(document).ready(function() {
@@ -167,8 +167,26 @@ $(document).ready(function() {
 			result = twos_complement(txtinput, word_size);
 		}
 		textbox.value = result;
-		console.log("converted to: " + this.value);
 	});
+
+	var dec = "0123456789-".split("");
+	var bin = ["0", "1"];
+	var hex = "0xabcdefXABCDEF0123456789".split("");
+	$("#textbox").on('input', function(event){
+		var last = textbox.value.substring(textbox.value.length-1);
+		var type = dropdown.value;
+		if ((type == "bin" || type == "tc") && bin.indexOf(last) == -1){
+			textbox.value = textbox.value.substring(0, textbox.value.length-1);
+		}
+		else if (type == "hex" && hex.indexOf(last) == -1){
+			textbox.value = textbox.value.substring(0, textbox.value.length-1);	
+		}
+		else if (type == "dec" && dec.indexOf(last) == -1){
+			textbox.value = textbox.value.substring(0, textbox.value.length-1);	
+		}
+	});
+
+
 
 });
 	
