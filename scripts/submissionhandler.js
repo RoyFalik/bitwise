@@ -14,14 +14,14 @@ function resultElement(elem1, elem2, txtinput, base){
     					Action <span class='caret'></span>\
   					</button>\
   					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
-					    <li onclick='negate(" +  elementID + ")'><a>~</a></li>\
-					    <li onclick='not(" +  elementID + ")'><a>!</a></li>\
+					    <li onclick='negate(" +  elementID + ")'><a>~ (complement)</a></li>\
+					    <li onclick='not(" +  elementID + ")'><a>! (negate)</a></li>\
 					    <li onclick='shift_left(" +  elementID + ")'><a>Shift left <<1</a></li>\
 					    <li onclick='shift_right(" +  elementID + ")'><a>Shift right >>1</a></li>\
-					    <li onclick='convertDec(" +  elementID + ")'><a>Convert to dec</a></li>\
-					    <li onclick='convertHex(" +  elementID + ")'><a>Convert to hex</a></li>\
-					    <li onclick='convertTC(" +  elementID + ")'><a>Convert to two's complement</a></li>\
-					    <li onclick='convertBin(" +  elementID + ")'><a>Convert to binary</a></li>\
+					    <li onclick='convertDec(" +  elementID + ")'><a>Convert to decimal</a></li>\
+					    <li onclick='convertHex(" +  elementID + ")'><a>Convert to hexadecimal</a></li>\
+					    <li onclick='convertTC(" +  elementID + ")'><a>Convert to two's complement (signed)</a></li>\
+					    <li onclick='convertBin(" +  elementID + ")'><a>Convert to binary (unsigned)</a></li>\
 					    <li onclick='deleteElement(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
@@ -75,14 +75,14 @@ function newElement(txtinput, base){
     					Action <span class='caret'></span>\
   					</button>\
   					<ul class='dropdown-menu' role='menu'style='z-index:9999;' >\
-					    <li onclick='negate(" +  elementID + ")'><a>~</a></li>\
-					    <li onclick='not(" +  elementID + ")'><a>!</a></li>\
+					    <li onclick='negate(" +  elementID + ")'><a>~ (complement)</a></li>\
+					    <li onclick='not(" +  elementID + ")'><a>! (negate)</a></li>\
 					    <li onclick='shift_left(" +  elementID + ")'><a>Shift left <<1</a></li>\
 					    <li onclick='shift_right(" +  elementID + ")'><a>Shift right >>1</a></li>\
-					    <li onclick='convertDec(" +  elementID + ")'><a>Convert to dec</a></li>\
-					    <li onclick='convertHex(" +  elementID + ")'><a>Convert to hex</a></li>\
-					    <li onclick='convertTC(" +  elementID + ")'><a>Convert to two's complement</a></li>\
-					    <li onclick='convertBin(" +  elementID + ")'><a>Convert to binary</a></li>\
+					    <li onclick='convertDec(" +  elementID + ")'><a>Convert to decimal</a></li>\
+					    <li onclick='convertHex(" +  elementID + ")'><a>Convert to hexadecimal</a></li>\
+					    <li onclick='convertTC(" +  elementID + ")'><a>Convert to two's complement (signed)</a></li>\
+					    <li onclick='convertBin(" +  elementID + ")'><a>Convert to binary (unsigned)</a></li>\
 					    <li onclick='deleteElement(" +  elementID + ")'><a>Delete</a></li>\
   					</ul>\
 				</div>\
@@ -148,30 +148,35 @@ $(document).ready(function() {
 
 		//when dropdown value (base) is changed, get output base
 	}).change(function convertRequest() {
-		//if original base was not two's complement, convert to new base
-		if(this.value != 'tc'){
-			result = convert_bases(previous, txtinput, this.value);
+		if (txtinput != ""){ 
+			if (this.value == "bin" && parseInt(txtinput, get_base(previous)) < 0)
+				textbox.value = "error - negative number";
+			else{
+				if(this.value != 'tc'){
+						result = convert_bases(previous, txtinput, this.value);
+				}
+				//if two's complement, interpret as two's complement
+				else{
+						//interpret
+						var word_size;
+						//determine if and which word size is chosen
+						if(document.getElementById("thirty_two_bit").checked)
+							word_size = 32;
+						else if(document.getElementById("sixty_four_bit").checked)
+							word_size = 64;
+						else
+							alert("Please choose a word size");
+						var dec = convert_bases(previous, txtinput, "dec");
+						result = twos_complement(dec, word_size);
+					}
+				textbox.value = result;
+			}
 		}
-		//if two's complement, interpret as two's complement
-		else{
-			//interpret
-			var word_size;
-			//determine if and which word size is chosen
-			if(document.getElementById("thirty_two_bit").checked)
-				word_size = 32;
-			else if(document.getElementById("sixty_four_bit").checked)
-				word_size = 64;
-			else
-				alert("Please choose a word size");
-
-			result = twos_complement(txtinput, word_size);
-		}
-		textbox.value = result;
 	});
 
 	var dec = "0123456789-".split("");
 	var bin = ["0", "1"];
-	var hex = "0xabcdefXABCDEF0123456789".split("");
+	var hex = "0abcdefABCDEF0123456789".split("");
 	$("#textbox").on('input', function(event){
 		var last = textbox.value.substring(textbox.value.length-1);
 		var type = dropdown.value;
@@ -179,10 +184,14 @@ $(document).ready(function() {
 			textbox.value = textbox.value.substring(0, textbox.value.length-1);
 		}
 		else if (type == "hex" && hex.indexOf(last) == -1){
-			textbox.value = textbox.value.substring(0, textbox.value.length-1);	
+			if (textbox.value != "0x")
+				textbox.value = textbox.value.substring(0, textbox.value.length-1);	
 		}
 		else if (type == "dec" && dec.indexOf(last) == -1){
 			textbox.value = textbox.value.substring(0, textbox.value.length-1);	
+		}
+		if (type == "hex" && textbox.value.split("").indexOf("x") == -1){
+			textbox.value = "0x" + textbox.value;
 		}
 	});
 

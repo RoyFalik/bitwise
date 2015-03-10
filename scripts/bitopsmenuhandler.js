@@ -86,7 +86,5 @@ function convertTC(elem1){
 }
 
 function deleteElement(elem){
-	console.log("being called");
-	console.log(elem);
 	elem.remove();
 }

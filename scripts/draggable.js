@@ -3,7 +3,6 @@
 		    var style = window.getComputedStyle(ev.target, null);
 		    var elementID = ev.target.id;
 		    var packet = (parseInt(style.getPropertyValue("left"),10) - ev.clientX) + ',' + (parseInt(style.getPropertyValue("top"),10) - ev.clientY) + ',' + elementID;
-		    console.log(packet);
 		    ev.dataTransfer.setData("text/plain", packet);
 		} 
 		function drag_over(event) { 

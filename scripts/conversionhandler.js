@@ -6,6 +6,11 @@ function convert_bases(original_base, input_num, new_base){
     var original_base_int = get_base(original_base);
     var convert_num = parseInt(input_num, original_base_int);
     var new_base_int = get_base(new_base);
+    //if converting negative to hex first go to two's complement then to hex
+    if (convert_num < 0 && new_base == "Hex"){
+        var tc = twos_complement(input_num, 32);
+        return convert_bases("tc", tc, "hex");
+    }
     converted_num = prefix(new_base_int) + convert_num.toString(new_base_int);
     return converted_num;
 }
@@ -39,7 +44,7 @@ function twos_complement(number, word){
     var MIN = (-1) * Math.pow(2, word);
     var result = "";
     var num = parseInt(number, 10);
-    console.log(num);
+
 
     if(num <= MAX && num >= MIN){
         //var abs_num = Math.abs(num);
