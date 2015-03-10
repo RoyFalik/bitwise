@@ -7,7 +7,7 @@ function convert_bases(original_base, input_num, new_base){
     var convert_num = parseInt(input_num, original_base_int);
     var new_base_int = get_base(new_base);
     //if converting negative to hex first go to two's complement then to hex
-    if (convert_num < 0 && new_base == "Hex"){
+    if (convert_num < 0 && new_base == "hex"){
         var tc = twos_complement(input_num, 32);
         return convert_bases("tc", tc, "hex");
     }

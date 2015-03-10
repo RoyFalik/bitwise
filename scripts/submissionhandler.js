@@ -195,6 +195,22 @@ $(document).ready(function() {
 		}
 	});
 
+	//submit a new number with enter
+	$("#textbox").on('keypress', function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { //Enter keycode
+	 		var txtinput = textbox.value;
+			if (txtinput === "")
+			{
+				alert("Please enter a number");
+			}
+			else{
+				var base = dropdown.value;
+				newElement(txtinput, base);
+			}
+		}
+	});
+
 
 
 });
